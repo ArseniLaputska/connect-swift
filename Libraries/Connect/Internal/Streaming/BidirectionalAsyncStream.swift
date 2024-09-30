@@ -40,7 +40,7 @@ final public class BidirectionalAsyncStream<
     /// Initialize a new stream.
     ///
     /// Note: `configureForSending()` must be called before using the stream.
-    init() {
+    public init() {
         self.asyncStream = AsyncStream<StreamResult<Output>> { continuation in
             self.receiveResult = { result in
                 if Task.isCancelled {
