@@ -21,7 +21,7 @@ import SwiftProtobuf
 /// If the library removes callback support in favor of only supporting async/await in the future,
 /// this class can be simplified.
 @available(iOS 13, *)
-class BidirectionalAsyncStream<
+final public class BidirectionalAsyncStream<
     Input: ProtobufMessage, Output: ProtobufMessage
 >: @unchecked Sendable {
     /// The underlying async stream that will be exposed to the consumer.
@@ -85,7 +85,7 @@ class BidirectionalAsyncStream<
 @available(iOS 13, *)
 extension BidirectionalAsyncStream: BidirectionalAsyncStreamInterface {
     @discardableResult
-    func send(_ input: Input) throws -> Self {
+    public func send(_ input: Input) throws -> Self {
         guard let sendData = self.requestCallbacks?.sendData else {
             throw NotConfiguredForSendingError()
         }
@@ -94,15 +94,15 @@ extension BidirectionalAsyncStream: BidirectionalAsyncStreamInterface {
         return self
     }
 
-    func results() -> AsyncStream<StreamResult<Output>> {
+    public func results() -> AsyncStream<StreamResult<Output>> {
         return self.asyncStream
     }
 
-    func close() {
+    public func close() {
         self.requestCallbacks?.sendClose()
     }
 
-    func cancel() {
+    public func cancel() {
         self.requestCallbacks?.cancel()
     }
 }
