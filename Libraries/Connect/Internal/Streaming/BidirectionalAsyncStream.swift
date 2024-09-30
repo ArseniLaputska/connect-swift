@@ -21,7 +21,7 @@ import SwiftProtobuf
 /// If the library removes callback support in favor of only supporting async/await in the future,
 /// this class can be simplified.
 @available(iOS 13, *)
-final public class BidirectionalAsyncStream<
+public class BidirectionalAsyncStream<
     Input: ProtobufMessage, Output: ProtobufMessage
 >: @unchecked Sendable {
     /// The underlying async stream that will be exposed to the consumer.
